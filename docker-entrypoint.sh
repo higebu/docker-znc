@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $# -lt 2 ]; then
 	echo "Usage: $0 ZNC_USER ZNC_PASS"
