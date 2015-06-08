@@ -1,14 +1,10 @@
-FROM        ubuntu:14.04
-MAINTAINER  Yuya Kusakabe "yuya.kusakabe@gmail.com"
+FROM alpine:latest
 
-# We use a bootstrap script to avoid having temporary cache files and build
-# dependencies being committed and included into the docker image.
-ADD         bootstrap.sh /tmp/
-RUN         chmod +x /tmp/bootstrap.sh; sync; /tmp/bootstrap.sh
+RUN apk --update add build-base znc znc-dev znc-extra \
+     && rm -rf /var/cache/apk/*
 
-RUN         useradd znc
-ADD         start-znc /usr/local/bin/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-EXPOSE      6667
-ENTRYPOINT  ["/usr/local/bin/start-znc"]
-CMD         [""]
+EXPOSE 6667
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

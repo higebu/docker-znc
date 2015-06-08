@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/bin/sh
 
 if [ $# -lt 2 ]; then
 	echo "Usage: $0 ZNC_USER ZNC_PASS"
@@ -18,13 +18,13 @@ if [ ${#chans_arr[@]} -gt 0 ]; then
 fi
 
 # Options.
-DATADIR="/znc-data"
+DATADIR="/home/znc"
 
-# Install znc-push
+# Get znc-push
 if [ ! -d "${DATADIR}/modules" ]; then
   mkdir -p "${DATADIR}/modules"
   cd "${DATADIR}/modules"
-  wget https://raw.github.com/jreese/znc-push/master/push.cpp /tmp/znc/modules/push.cpp
+  wget https://raw.github.com/jreese/znc-push/master/push.cpp
   cd "$cwd"
 fi
 
